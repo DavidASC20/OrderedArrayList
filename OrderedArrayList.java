@@ -13,7 +13,14 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
         if(element == null){
             throw new IllegalArgumentException("Null cannot be taken as a value");
         }
+        if(super.isEmpty() == true){
+            super.add(element);
+        }
+        else if(element.compareTo(super.get(super.size() - 1)) == 1){
+            super.add(element);
+        }else{
         super.add(correctIndex(element), element);
+        }
         return true;
     }
 
@@ -21,26 +28,38 @@ public class OrderedArrayList<T extends Comparable<T>> extends NoNullArrayList<T
         if(element == null){
             throw new IllegalArgumentException("Null cannot be taken as a value");
         }
+        if(super.isEmpty() == true){
+            super.add(element);
+        }
+        else if(element.compareTo(super.get(super.size() - 1)) == 1){
+            super.add(element);
+        }else{
         super.add(correctIndex(element), element);
+        }
     }
 
     public T set(int index, T value){
         if(value == null){
             throw new IllegalArgumentException("Null cannot be taken as a value");
         }
+        T x = super.get(index);
         remove(index);
         add(value);
-        return value;
+        return x;
     }
 
     public int correctIndex(T element){
-        int temp = 0;
+        int x = 0;
         for(int i = 0; i < super.size(); i++){
-            if(element.compareTo(super.get(i)) == -1){
-                temp = i;
+            if(element.compareTo(super.get(i)) == 1){
+            }else if(element.compareTo(super.get(i)) == 0){
+                x = i;
                 break;
             }
-        }
-        return temp;
+            else if(element.compareTo(super.get(i)) == -1){
+                x = i;
+                break;
+            }
+        }return x;
     }
 }
